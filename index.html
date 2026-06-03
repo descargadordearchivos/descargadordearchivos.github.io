@@ -8,13 +8,23 @@
     body {
       margin: 0;
       padding: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
       background-color: #f4f4f4;
       font-family: Arial, sans-serif;
+    }
+
+    .ad-top {
+      margin: 15px 0;
+      text-align: center;
+    }
+
+    .main-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .download-button {
@@ -41,8 +51,7 @@
       transform: none;
     }
 
-    /* Espacio para anuncios */
-    .ad-container {
+    .ad-bottom {
       margin: 15px 0;
       text-align: center;
     }
@@ -50,8 +59,8 @@
 </head>
 <body>
 
-  <!-- Anuncio 1 - Highperformanceformat -->
-  <div class="ad-container">
+  <!-- Anuncio 1 -->
+  <div class="ad-top">
     <script>
       atOptions = {
         'key' : 'e5f66a25aedbea80770bf144adbb362f',
@@ -64,23 +73,26 @@
     <script src="https://www.highperformanceformat.com/e5f66a25aedbea80770bf144adbb362f/invoke.js"></script>
   </div>
 
-  <!-- Anuncio 2 - Effective CPM -->
-  <div class="ad-container">
+  <!-- Anuncio 2 -->
+  <div class="ad-top">
     <script async="async" data-cfasync="false" src="https://pl29628302.effectivecpmnetwork.com/0d365a6b85dcb8ff39d6be5790f2b26c/invoke.js"></script>
     <div id="container-0d365a6b85dcb8ff39d6be5790f2b26c"></div>
   </div>
 
-  <!-- Botón con temporizador -->
-  <button id="downloadBtn" class="download-button" disabled>
-    Esperando 10 segundos...
-  </button>
+  <!-- Botón centrado -->
+  <div class="main-container">
+    <button id="downloadBtn" class="download-button" disabled>
+      Esperando 10 segundos...
+    </button>
+  </div>
 
-  <!-- Anuncios adicionales -->
-  <div class="ad-container">
+  <!-- Anuncio 3 -->
+  <div class="ad-bottom">
     <script src="https://pl29628303.effectivecpmnetwork.com/3a/b7/31/3ab731c07a32ef762a609187c27811f7.js"></script>
   </div>
 
-  <div class="ad-container">
+  <!-- Anuncio 4 -->
+  <div class="ad-bottom">
     <script src="https://pl29628301.effectivecpmnetwork.com/59/f1/07/59f1071c7395e28771cf20233891e6a8.js"></script>
   </div>
 
@@ -105,7 +117,7 @@
       }
     });
 
-    // Abre el enlace adicional de Effective CPM (popunder / redirección)
+    // Enlace adicional
     window.open('https://www.effectivecpmnetwork.com/dcyt95j7b?key=59ba8ab6636831c9de6999d76daca652', '_blank');
   </script>
 
