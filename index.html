@@ -3,321 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Descargar Archivo</title>
+  <title>Descargar Minecraft</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
-
-    :root {
-      --bg: #0e0e10;
-      --surface: #1a1a1f;
-      --border: #2a2a32;
-      --accent: #f0c040;
-      --accent2: #ff6b35;
-      --text: #e8e8ee;
-      --muted: #888899;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+      padding: 0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 16px;
-      position: relative;
-      overflow-x: hidden;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
     }
 
-    /* Background grid */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(240,192,64,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240,192,64,0.03) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .ad-zone {
-      width: 100%;
-      max-width: 760px;
+    .ad-top, .ad-bottom {
+      margin: 15px 0;
       text-align: center;
-      position: relative;
-      z-index: 1;
     }
 
-    /* ——— Card ——— */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px 32px 36px;
-      width: 100%;
-      max-width: 520px;
-      position: relative;
-      z-index: 1;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
-    }
-
-    .card-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .card-sub {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 32px;
-    }
-
-    /* ——— Progress bar ——— */
-    .progress-label {
+    .main-container {
+      flex: 1;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      margin-bottom: 10px;
-      font-size: 13px;
+      gap: 20px;
     }
 
-    .progress-label span:first-child {
-      color: var(--muted);
-      font-weight: 500;
+    .progress-container {
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
     }
 
-    .progress-label .count {
-      font-family: 'Syne', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--accent);
+    .progress-text {
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
     }
 
-    .progress-track {
-      background: var(--border);
-      border-radius: 99px;
-      height: 12px;
-      width: 100%;
+    .progress-bar {
+      height: 25px;
+      background-color: #ddd;
+      border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 28px;
-      position: relative;
+      border: 2px solid #00b140;
     }
 
     .progress-fill {
       height: 100%;
-      border-radius: 99px;
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      background: linear-gradient(90deg, #00b140, #00e65c);
       width: 0%;
-      transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 0 14px rgba(240,192,64,0.4);
-    }
-
-    /* Dots on track */
-    .progress-dots {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 2px;
-      margin-bottom: 28px;
-      margin-top: -22px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--border);
-      border: 2px solid var(--bg);
-      transition: background 0.3s, transform 0.3s;
-    }
-
-    .dot.active {
-      background: var(--accent);
-      transform: scale(1.3);
-    }
-
-    /* ——— Ad buttons ——— */
-    .ads-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .ad-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 10px;
-      cursor: pointer;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
+      transition: width 0.4s ease;
       display: flex;
       align-items: center;
-      gap: 10px;
-      transition: border-color 0.2s, background 0.2s, transform 0.15s;
-      text-align: left;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ad-btn::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(240,192,64,0.07), transparent);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .ad-btn:hover:not(.done) {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .ad-btn:hover::after { opacity: 1; }
-
-    .ad-btn.done {
-      border-color: #2e6e38;
-      background: rgba(46,110,56,0.15);
-      cursor: default;
-      transform: none;
-    }
-
-    .ad-btn.done .ad-icon { filter: grayscale(0.3); }
-
-    .ad-icon {
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-
-    .ad-info { display: flex; flex-direction: column; gap: 2px; }
-    .ad-name { font-weight: 600; font-size: 13px; }
-    .ad-status { font-size: 11px; color: var(--muted); }
-    .ad-btn.done .ad-status { color: #5fcf72; }
-
-    .ad-check {
-      margin-left: auto;
-      font-size: 16px;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .ad-btn.done .ad-check { opacity: 1; }
-
-    /* Wide 5th ad */
-    .ads-grid .wide {
-      grid-column: span 2;
-    }
-
-    /* ——— Download button ——— */
-    .download-btn {
-      width: 100%;
-      padding: 18px;
-      font-family: 'Syne', sans-serif;
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-      color: #0e0e10;
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      transition: opacity 0.3s, transform 0.2s, box-shadow 0.3s;
-      box-shadow: 0 8px 28px rgba(240,192,64,0.3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .download-btn:disabled {
-      background: var(--border);
-      color: var(--muted);
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-
-    .download-btn:not(:disabled):hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(240,192,64,0.45);
-    }
-
-    .download-btn:not(:disabled):active {
-      transform: translateY(0);
-    }
-
-    /* Shine on enabled */
-    .download-btn:not(:disabled)::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -60%;
-      width: 40%;
-      height: 200%;
-      background: rgba(255,255,255,0.25);
-      transform: skewX(-20deg);
-      animation: shine 2.4s infinite;
-    }
-
-    @keyframes shine {
-      0% { left: -60%; }
-      60% { left: 130%; }
-      100% { left: 130%; }
-    }
-
-    /* ——— Toast ——— */
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: #1e1e28;
-      border: 1px solid var(--accent);
-      border-radius: 12px;
-      padding: 12px 24px;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
       font-size: 14px;
-      font-weight: 500;
-      color: var(--accent);
-      z-index: 999;
-      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
-      white-space: nowrap;
     }
 
-    .toast.show { transform: translateX(-50%) translateY(0); }
-
-    /* ——— Confetti burst (CSS only) ——— */
-    .burst {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      pointer-events: none;
-      z-index: 998;
+    .download-button {
+      padding: 20px 60px;
+      font-size: 26px;
+      font-weight: bold;
+      color: white;
+      background-color: #00b140;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+      cursor: pointer;
     }
 
-    .burst span {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 2px;
-      opacity: 0;
+    .download-button:hover {
+      background-color: #008f33;
+      transform: scale(1.05);
+    }
+
+    .download-button:disabled {
+      background-color: #666;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
 
-  <!-- Ad top -->
-  <div class="ad-zone">
+  <!-- Anuncio 1 -->
+  <div class="ad-top ad-clickable" data-ad="1">
     <script>
       atOptions = {
         'key' : 'e5f66a25aedbea80770bf144adbb362f',
@@ -328,166 +100,80 @@
       };
     </script>
     <script src="https://www.highperformanceformat.com/e5f66a25aedbea80770bf144adbb362f/invoke.js"></script>
+  </div>
 
-    <script async data-cfasync="false" src="https://pl29628302.effectivecpmnetwork.com/0d365a6b85dcb8ff39d6be5790f2b26c/invoke.js"></script>
+  <!-- Anuncio 2 -->
+  <div class="ad-top ad-clickable" data-ad="2">
+    <script async="async" data-cfasync="false" src="https://pl29628302.effectivecpmnetwork.com/0d365a6b85dcb8ff39d6be5790f2b26c/invoke.js"></script>
     <div id="container-0d365a6b85dcb8ff39d6be5790f2b26c"></div>
   </div>
 
-  <!-- Main card -->
-  <div class="card">
-    <div class="card-title">⬇️ Descargar archivo</div>
-    <div class="card-sub">Visita 5 patrocinadores para desbloquear la descarga</div>
-
-    <div class="progress-label">
-      <span>Progreso de desbloqueo</span>
-      <span class="count" id="countDisplay">0 / 5</span>
-    </div>
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-    <div class="progress-dots" id="dots"></div>
-
-    <div class="ads-grid" id="adsGrid">
-      <!-- Generated by JS -->
+  <div class="main-container">
+    <div class="progress-container">
+      <div class="progress-text">Anuncios clickeados: <span id="count">0</span>/5</div>
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill">0%</div>
+      </div>
     </div>
 
-    <button class="download-btn" id="downloadBtn" disabled>
-      🔒 Visita los 5 patrocinadores
+    <button id="downloadBtn" class="download-button" disabled>
+      Esperando anuncios...
     </button>
   </div>
 
-  <!-- Ad bottom -->
-  <div class="ad-zone">
+  <!-- Anuncio 3 -->
+  <div class="ad-bottom ad-clickable" data-ad="3">
     <script src="https://pl29628303.effectivecpmnetwork.com/3a/b7/31/3ab731c07a32ef762a609187c27811f7.js"></script>
+  </div>
+
+  <!-- Anuncio 4 -->
+  <div class="ad-bottom ad-clickable" data-ad="4">
     <script src="https://pl29628301.effectivecpmnetwork.com/59/f1/07/59f1071c7395e28771cf20233891e6a8.js"></script>
   </div>
 
-  <div class="toast" id="toast"></div>
-  <div class="burst" id="burst"></div>
-
   <script>
-    const ADS = [
-      { id: 0, icon: '📢', name: 'Patrocinador 1', url: 'https://www.effectivecpmnetwork.com/dcyt95j7b?key=59ba8ab6636831c9de6999d76daca652' },
-      { id: 1, icon: '🎯', name: 'Patrocinador 2', url: 'https://pl29628302.effectivecpmnetwork.com/0d365a6b85dcb8ff39d6be5790f2b26c/invoke.js' },
-      { id: 2, icon: '🚀', name: 'Patrocinador 3', url: 'https://pl29628303.effectivecpmnetwork.com/3a/b7/31/3ab731c07a32ef762a609187c27811f7.js' },
-      { id: 3, icon: '💡', name: 'Patrocinador 4', url: 'https://pl29628301.effectivecpmnetwork.com/59/f1/07/59f1071c7395e28771cf20233891e6a8.js' },
-      { id: 4, icon: '⭐', name: 'Patrocinador 5', url: 'https://www.highperformanceformat.com/e5f66a25aedbea80770bf144adbb362f/invoke.js', wide: true },
-    ];
+    let count = parseInt(localStorage.getItem('adCount')) || 0;
+    const maxAds = 5;
 
-    const DOWNLOAD_URL = 'https://www.mediafire.com/file/4k5lfchcefqlaz2/minecraft-26-23.apk/file';
+    const countElement = document.getElementById('count');
+    const progressFill = document.getElementById('progressFill');
+    const button = document.getElementById('downloadBtn');
 
-    let clicked = new Set();
+    function updateProgress() {
+      countElement.textContent = count;
+      const percentage = Math.min((count / maxAds) * 100, 100);
+      progressFill.style.width = percentage + '%';
+      progressFill.textContent = Math.round(percentage) + '%';
 
-    const grid = document.getElementById('adsGrid');
-    const fill = document.getElementById('progressFill');
-    const countDisplay = document.getElementById('countDisplay');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const dotsContainer = document.getElementById('dots');
-    const toast = document.getElementById('toast');
-
-    // Build dots
-    for (let i = 0; i < 5; i++) {
-      const d = document.createElement('div');
-      d.className = 'dot';
-      d.id = 'dot-' + i;
-      dotsContainer.appendChild(d);
-    }
-
-    // Build ad buttons
-    ADS.forEach(ad => {
-      const btn = document.createElement('button');
-      btn.className = 'ad-btn' + (ad.wide ? ' wide' : '');
-      btn.id = 'ad-' + ad.id;
-      btn.innerHTML = `
-        <span class="ad-icon">${ad.icon}</span>
-        <span class="ad-info">
-          <span class="ad-name">${ad.name}</span>
-          <span class="ad-status" id="status-${ad.id}">Toca para visitar</span>
-        </span>
-        <span class="ad-check" id="check-${ad.id}">✅</span>
-      `;
-      btn.addEventListener('click', () => handleAdClick(ad));
-      grid.appendChild(btn);
-    });
-
-    function handleAdClick(ad) {
-      window.open(ad.url, '_blank');
-      if (!clicked.has(ad.id)) {
-        clicked.add(ad.id);
-
-        // Mark button done
-        const btn = document.getElementById('ad-' + ad.id);
-        btn.classList.add('done');
-        document.getElementById('status-' + ad.id).textContent = '¡Visitado!';
-
-        // Update progress
-        const n = clicked.size;
-        fill.style.width = (n / 5 * 100) + '%';
-        countDisplay.textContent = n + ' / 5';
-
-        // Activate dot
-        document.getElementById('dot-' + (n - 1)).classList.add('active');
-
-        // Toast
-        showToast(n < 5
-          ? `✅ ¡${n} de 5! ${5 - n} más para desbloquear`
-          : '🎉 ¡Descarga desbloqueada!'
-        );
-
-        if (n === 5) {
-          unlockDownload();
-        }
+      if (count >= maxAds) {
+        button.textContent = "⬇️ Descargar el archivo";
+        button.disabled = false;
+      } else {
+        button.textContent = `Faltan ${maxAds - count} anuncios`;
+        button.disabled = true;
       }
     }
 
-    function unlockDownload() {
-      downloadBtn.disabled = false;
-      downloadBtn.textContent = '⬇️ Descargar el archivo';
-      confettiBurst();
-    }
+    document.querySelectorAll('.ad-clickable').forEach(ad => {
+      ad.style.cursor = 'pointer';
+      ad.addEventListener('click', () => {
+        count = Math.min(count + 1, maxAds);
+        localStorage.setItem('adCount', count);
+        updateProgress();
+        
+        // Abre el enlace del anuncio
+        window.open('https://www.effectivecpmnetwork.com/dcyt95j7b?key=59ba8ab6636831c9de6999d76daca652', '_blank');
+      });
+    });
 
-    downloadBtn.addEventListener('click', () => {
-      if (!downloadBtn.disabled) {
-        window.open(DOWNLOAD_URL, '_blank');
+    button.addEventListener('click', () => {
+      if (!button.disabled) {
+        window.open('https://www.mediafire.com/file/4k5lfchcefqlaz2/minecraft-26-23.apk/file', '_blank');
       }
     });
 
-    // Toast helper
-    let toastTimer;
-    function showToast(msg) {
-      clearTimeout(toastTimer);
-      toast.textContent = msg;
-      toast.classList.add('show');
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
-    }
-
-    // Simple CSS confetti burst
-    function confettiBurst() {
-      const burst = document.getElementById('burst');
-      burst.innerHTML = '';
-      const colors = ['#f0c040','#ff6b35','#5fcf72','#4fc3f7','#ce93d8'];
-      for (let i = 0; i < 20; i++) {
-        const s = document.createElement('span');
-        const angle = (i / 20) * 360;
-        const dist = 60 + Math.random() * 80;
-        const color = colors[i % colors.length];
-        s.style.cssText = `
-          background:${color};
-          animation: fly${i} 0.8s ease-out forwards;
-        `;
-        const style = document.createElement('style');
-        const dx = Math.cos(angle * Math.PI / 180) * dist;
-        const dy = Math.sin(angle * Math.PI / 180) * dist;
-        style.textContent = `
-          @keyframes fly${i} {
-            0%   { opacity:1; transform: translate(0,0) rotate(0deg); }
-            100% { opacity:0; transform: translate(${dx}px,${dy}px) rotate(${Math.random()*360}deg); }
-          }
-        `;
-        document.head.appendChild(style);
-        burst.appendChild(s);
-      }
-    }
+    updateProgress();
   </script>
+
 </body>
 </html>
