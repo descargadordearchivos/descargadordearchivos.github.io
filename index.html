@@ -10,6 +10,7 @@
       padding: 0;
       height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       background-color: #f4f4f4;
@@ -39,13 +40,49 @@
       cursor: not-allowed;
       transform: none;
     }
+
+    /* Espacio para anuncios */
+    .ad-container {
+      margin: 15px 0;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Anuncio 1 - Highperformanceformat -->
+  <div class="ad-container">
+    <script>
+      atOptions = {
+        'key' : 'e5f66a25aedbea80770bf144adbb362f',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+    <script src="https://www.highperformanceformat.com/e5f66a25aedbea80770bf144adbb362f/invoke.js"></script>
+  </div>
+
+  <!-- Anuncio 2 - Effective CPM -->
+  <div class="ad-container">
+    <script async="async" data-cfasync="false" src="https://pl29628302.effectivecpmnetwork.com/0d365a6b85dcb8ff39d6be5790f2b26c/invoke.js"></script>
+    <div id="container-0d365a6b85dcb8ff39d6be5790f2b26c"></div>
+  </div>
+
+  <!-- Botón con temporizador -->
   <button id="downloadBtn" class="download-button" disabled>
     Esperando 10 segundos...
   </button>
+
+  <!-- Anuncios adicionales -->
+  <div class="ad-container">
+    <script src="https://pl29628303.effectivecpmnetwork.com/3a/b7/31/3ab731c07a32ef762a609187c27811f7.js"></script>
+  </div>
+
+  <div class="ad-container">
+    <script src="https://pl29628301.effectivecpmnetwork.com/59/f1/07/59f1071c7395e28771cf20233891e6a8.js"></script>
+  </div>
 
   <script>
     let timeLeft = 10;
@@ -62,12 +99,14 @@
       }
     }, 1000);
 
-    // Al hacer clic después del temporizador
     button.addEventListener('click', () => {
       if (!button.disabled) {
         window.open('https://www.mediafire.com/file/4k5lfchcefqlaz2/minecraft-26-23.apk/file', '_blank');
       }
     });
+
+    // Abre el enlace adicional de Effective CPM (popunder / redirección)
+    window.open('https://www.effectivecpmnetwork.com/dcyt95j7b?key=59ba8ab6636831c9de6999d76daca652', '_blank');
   </script>
 
 </body>
