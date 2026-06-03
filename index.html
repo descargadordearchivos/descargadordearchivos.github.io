@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descargar Minecraft</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
 
+    .download-button {
+      padding: 20px 60px;
+      font-size: 26px;
+      font-weight: bold;
+      color: white;
+      background-color: #00b140;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .download-button:hover {
+      background-color: #008f33;
+      transform: scale(1.05);
+    }
+
+    .download-button:disabled {
+      background-color: #666;
+      cursor: not-allowed;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="downloadBtn" class="download-button" disabled>
+    Esperando 10 segundos...
+  </button>
+
+  <script>
+    let timeLeft = 10;
+    const button = document.getElementById('downloadBtn');
+
+    const countdown = setInterval(() => {
+      timeLeft--;
+      button.textContent = `Esperando ${timeLeft} segundos...`;
+
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        button.textContent = "⬇️ Descargar Minecraft";
+        button.disabled = false;
+      }
+    }, 1000);
+
+    // Al hacer clic después del temporizador
+    button.addEventListener('click', () => {
+      if (!button.disabled) {
+        window.open('https://www.mediafire.com/file/4k5lfchcefqlaz2/minecraft-26-23.apk/file', '_blank');
+      }
+    });
+  </script>
+
+</body>
+</html>
