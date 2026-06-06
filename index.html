@@ -1,179 +1,166 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Descargar Minecraft</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-color: #f4f4f4;
-      font-family: Arial, sans-serif;
-    }
-
-    .ad-top, .ad-bottom {
-      margin: 15px 0;
-      text-align: center;
-    }
-
-    .main-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .progress-container {
-      width: 80%;
-      max-width: 500px;
-      text-align: center;
-    }
-
-    .progress-text {
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #333;
-    }
-
-    .progress-bar {
-      height: 25px;
-      background-color: #ddd;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid #00b140;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #00b140, #00e65c);
-      width: 0%;
-      transition: width 0.4s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .download-button {
-      padding: 20px 60px;
-      font-size: 26px;
-      font-weight: bold;
-      color: white;
-      background-color: #00b140;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-
-    .download-button:hover {
-      background-color: #008f33;
-      transform: scale(1.05);
-    }
-
-    .download-button:disabled {
-      background-color: #666;
-      cursor: not-allowed;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Anuncio 1 -->
-  <div class="ad-top ad-clickable" data-ad="1">
-    <script>
-      atOptions = {
-        'key' : 'e5f66a25aedbea80770bf144adbb362f',
-        'format' : 'iframe',
-        'height' : 90,
-        'width' : 728,
-        'params' : {}
-      };
-    </script>
-    <script src="https://www.highperformanceformat.com/e5f66a25aedbea80770bf144adbb362f/invoke.js"></script>
-  </div>
-
-  <!-- Anuncio 2 -->
-  <div class="ad-top ad-clickable" data-ad="2">
-    <script async="async" data-cfasync="false" src="https://pl29628302.effectivecpmnetwork.com/0d365a6b85dcb8ff39d6be5790f2b26c/invoke.js"></script>
-    <div id="container-0d365a6b85dcb8ff39d6be5790f2b26c"></div>
-  </div>
-
-  <div class="main-container">
-    <div class="progress-container">
-      <div class="progress-text">Anuncios clickeados: <span id="count">0</span>/5</div>
-      <div class="progress-bar">
-        <div id="progressFill" class="progress-fill">0%</div>
-      </div>
-    </div>
-
-    <button id="downloadBtn" class="download-button" disabled>
-      Esperando anuncios...
-    </button>
-  </div>
-
-  <!-- Anuncio 3 -->
-  <div class="ad-bottom ad-clickable" data-ad="3">
-    <script src="https://pl29628303.effectivecpmnetwork.com/3a/b7/31/3ab731c07a32ef762a609187c27811f7.js"></script>
-  </div>
-
-  <!-- Anuncio 4 -->
-  <div class="ad-bottom ad-clickable" data-ad="4">
-    <script src="https://pl29628301.effectivecpmnetwork.com/59/f1/07/59f1071c7395e28771cf20233891e6a8.js"></script>
-  </div>
-
+<!DOCTYPE html>  <html lang="es">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Descargar Minecraft</title>  
+  <!-- Google tag (gtag.js) - GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CCGKC6HP0V"></script>
   <script>
-    let count = parseInt(localStorage.getItem('adCount')) || 0;
-    const maxAds = 5;
-
-    const countElement = document.getElementById('count');
-    const progressFill = document.getElementById('progressFill');
-    const button = document.getElementById('downloadBtn');
-
-    function updateProgress() {
-      countElement.textContent = count;
-      const percentage = Math.min((count / maxAds) * 100, 100);
-      progressFill.style.width = percentage + '%';
-      progressFill.textContent = Math.round(percentage) + '%';
-
-      if (count >= maxAds) {
-        button.textContent = "⬇️ Descargar el archivo";
-        button.disabled = false;
-      } else {
-        button.textContent = `Faltan ${maxAds - count} anuncios`;
-        button.disabled = true;
-      }
-    }
-
-    document.querySelectorAll('.ad-clickable').forEach(ad => {
-      ad.style.cursor = 'pointer';
-      ad.addEventListener('click', () => {
-        count = Math.min(count + 1, maxAds);
-        localStorage.setItem('adCount', count);
-        updateProgress();
-        
-        // Abre el enlace del anuncio
-        window.open('https://www.effectivecpmnetwork.com/dcyt95j7b?key=59ba8ab6636831c9de6999d76daca652', '_blank');
-      });
-    });
-
-    button.addEventListener('click', () => {
-      if (!button.disabled) {
-        window.open('https://www.mediafire.com/file/4k5lfchcefqlaz2/minecraft-26-23.apk/file', '_blank');
-      }
-    });
-
-    updateProgress();
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CCGKC6HP0V');
   </script>
+  <style>  
+    body {  
+      margin: 0;  
+      padding: 0;  
+      min-height: 100vh;  
+      display: flex;  
+      flex-direction: column;  
+      background-color: #f4f4f4;  
+      font-family: Arial, sans-serif;  
+    }  .ad-top, .ad-bottom {  
+  margin: 15px 0;  
+  text-align: center;  
+}  
 
-</body>
+.main-container {  
+  flex: 1;  
+  display: flex;  
+  flex-direction: column;  
+  justify-content: center;  
+  align-items: center;  
+  gap: 20px;  
+}  
+
+.progress-container {  
+  width: 80%;  
+  max-width: 500px;  
+  text-align: center;  
+}  
+
+.progress-text {  
+  margin-bottom: 8px;  
+  font-weight: bold;  
+  color: #333;  
+}  
+
+.progress-bar {  
+  height: 25px;  
+  background-color: #ddd;  
+  border-radius: 12px;  
+  overflow: hidden;  
+  border: 2px solid #00b140;  
+}  
+
+.progress-fill {  
+  height: 100%;  
+  background: linear-gradient(90deg, #00b140, #00e65c);  
+  width: 0%;  
+  transition: width 0.4s ease;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  color: white;  
+  font-weight: bold;  
+  font-size: 14px;  
+}  
+
+.download-button {  
+  padding: 20px 60px;  
+  font-size: 26px;  
+  font-weight: bold;  
+  color: white;  
+  background-color: #00b140;  
+  border: none;  
+  border-radius: 10px;  
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);  
+  transition: all 0.3s;  
+  cursor: pointer;  
+}  
+
+.download-button:hover {  
+  background-color: #008f33;  
+  transform: scale(1.05);  
+}  
+
+.download-button:disabled {  
+  background-color: #666;  
+  cursor: not-allowed;  
+}
+
+  </style>  
+</head>  
+<body>    <!-- Anuncio 1 -->    <div class="ad-top ad-clickable" data-ad="1">  
+    <script>  
+      atOptions = {  
+        'key' : 'e5f66a25aedbea80770bf144adbb362f',  
+        'format' : 'iframe',  
+        'height' : 90,  
+        'width' : 728,  
+        'params' : {}  
+      };  
+    </script>  
+    <script src="https://www.highperformanceformat.com/e5f66a25aedbea80770bf144adbb362f/invoke.js"></script>  
+  </div>    <!-- Anuncio 2 -->    <div class="ad-top ad-clickable" data-ad="2">  
+    <script async="async" data-cfasync="false" src="https://pl29628302.effectivecpmnetwork.com/0d365a6b85dcb8ff39d6be5790f2b26c/invoke.js"></script>  
+    <div id="container-0d365a6b85dcb8ff39d6be5790f2b26c"></div>  
+  </div>    <div class="main-container">  
+    <div class="progress-container">  
+      <div class="progress-text">Anuncios clickeados: <span id="count">0</span>/5</div>  
+      <div class="progress-bar">  
+        <div id="progressFill" class="progress-fill">0%</div>  
+      </div>  
+    </div>  <button id="downloadBtn" class="download-button" disabled>  
+  Esperando anuncios...  
+</button>
+
+  </div>    <!-- Anuncio 3 -->    <div class="ad-bottom ad-clickable" data-ad="3">  
+    <script src="https://pl29628303.effectivecpmnetwork.com/3a/b7/31/3ab731c07a32ef762a609187c27811f7.js"></script>  
+  </div>    <!-- Anuncio 4 -->    <div class="ad-bottom ad-clickable" data-ad="4">  
+    <script src="https://pl29628301.effectivecpmnetwork.com/59/f1/07/59f1071c7395e28771cf20233891e6a8.js"></script>  
+  </div>    <script>  
+    let count = parseInt(localStorage.getItem('adCount')) || 0;  
+    const maxAds = 5;  
+  
+    const countElement = document.getElementById('count');  
+    const progressFill = document.getElementById('progressFill');  
+    const button = document.getElementById('downloadBtn');  
+  
+    function updateProgress() {  
+      countElement.textContent = count;  
+      const percentage = Math.min((count / maxAds) * 100, 100);  
+      progressFill.style.width = percentage + '%';  
+      progressFill.textContent = Math.round(percentage) + '%';  
+  
+      if (count >= maxAds) {  
+        button.textContent = "⬇️ Descargar el archivo";  
+        button.disabled = false;  
+      } else {  
+        button.textContent = `Faltan ${maxAds - count} anuncios`;  
+        button.disabled = true;  
+      }  
+    }  
+  
+    document.querySelectorAll('.ad-clickable').forEach(ad => {  
+      ad.style.cursor = 'pointer';  
+      ad.addEventListener('click', () => {  
+        count = Math.min(count + 1, maxAds);  
+        localStorage.setItem('adCount', count);  
+        updateProgress();  
+          
+        // Abre el enlace del anuncio  
+        window.open('https://www.effectivecpmnetwork.com/dcyt95j7b?key=59ba8ab6636831c9de6999d76daca652', '_blank');  
+      });  
+    });  
+  
+    button.addEventListener('click', () => {  
+      if (!button.disabled) {  
+        window.open('https://www.mediafire.com/file/4k5lfchcefqlaz2/minecraft-26-23.apk/file', '_blank');  
+      }  
+    });  
+  
+    updateProgress();  
+  </script>  </body>  
 </html>
